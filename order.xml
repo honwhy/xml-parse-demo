@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CEBROOT xmlns="http://www.springframework.org/schema/beans">
+	
+	<Order>
+		<OrderNo>xxxx</OrderNo>
+		<status>2</status>
+		<Msg>yyyyy</Msg>
+	</Order>
+</CEBROOT>
