@@ -27,12 +27,17 @@ public class XmlParseUtilsTest extends BaseTest{
 		paths.put("status", "/CEBROOT/Order/status");
 		paths.put("msg", "/CEBROOT/Order/Msg");
 		
-		Map<String,String> context = xmlParseUtils.parse(param, paths);
+		Map<String,Object> context = xmlParseUtils.parse(param, paths);
 		
-		param = FileUtils.readFileToString(new File("status.js"), Charsets.UTF_8.toString());
-		param = xmlParseUtils.render(param, context);
+		String expression = FileUtils.readFileToString(new File("status.js"), Charsets.UTF_8.toString());
+		expression = xmlParseUtils.render(expression, context);
 		
-		Integer ret = xmlParseUtils.evaluate(param);
-		assertTrue(ret == 2);
+		Object ret = xmlParseUtils.evaluate(expression);
+		assertTrue(ret instanceof Double);
+		
+		expression = "status == 2 ? 2 : 1";
+		Object o = xmlParseUtils.evaluateByJexl(expression, context);
+		assertTrue(o instanceof Integer);
+		assertTrue(o.equals(2));
 	}
 }
